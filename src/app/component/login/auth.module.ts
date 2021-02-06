@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/core/shared.module';
 import { LoginComponent } from './login.component';
 
 @NgModule({
@@ -15,6 +16,7 @@ import { LoginComponent } from './login.component';
         component : LoginComponent
       },
     ]),
+    SharedModule
   ],
 })
 export class AuthModule {}

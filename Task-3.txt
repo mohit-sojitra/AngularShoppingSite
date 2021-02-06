@@ -1,0 +1,34 @@
+- Setup Latest Angular
+- Create Login component
+- Create Interceptor for token management and error Interceptor to handle the errors
+- HTTPClient must handle Authorization Bearer
+- Use Typification for each function
+- Use Json to manage the data and handle the API Request / Response or use fake API (Don't use promises for data fetching from query)
+- Use RXjs operators
+- Need Notification messages when It's required (toaster).
+- Use models / interface / class
+- Set up product list + add page.make column for action delete/edit
+- Use change detection for product list
+- From product list page, user can add the product in cart.(user can update quantity of product/delete product from cart)
+- Implement the loader functionality on each page request using interceptor - (Don't use set-timeout)
+- Don't forget to destroy the object which you have subscribed
+- Product list - required the custom search. on each key enter in text box, call the product API and search data from products collection.
+    - If I will enter "A" then it display product start with "A".
+        - Now I will enter "P" then it display product start with "AP".
+  - Now, I will enter "PL" then needs to cancel the last API call and continue with latest API.
+- separate the layout like header, footer, content
+- use shared module concept
+- make common service to handle the error
+
+- productId
+- productName
+- productSKU  (article number)
+- productPrice
+
+
+* Note *
+- Use Lazy Loading routing structure with pre-rendering
+- Use third party API or create fake back end for the API call
+
+Api reference:
+https://fakestoreapi.com/

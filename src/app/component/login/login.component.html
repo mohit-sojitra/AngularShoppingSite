@@ -5,6 +5,10 @@
         <div id="login-column" class="col-md-6">
           <div id="login-box" class="col-md-12">
             <br />
+            <div class="alert alert-danger" role="alert" *ngIf="error">
+              {{ error }}
+            </div>
+            <br />
             <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
               <h3 class="text-center text-info">Login</h3>
               <br />
@@ -44,17 +48,16 @@
                   >Short Password</small
                 >
               </div>
-              <div class="form-group">
+              <div class="form-group" *ngIf="!isLoading">
                 <input
-                  type="button"
+                  type="submit"
                   name="submit"
                   class="btn btn-info btn-md"
                   value="LOGIN"
+                  [disabled]="!loginForm.valid"
                 />
               </div>
-              <!-- <div id="register-link" class="text-right">
-                  <a href="#" class="text-info">Register here</a>
-                </div> -->
+              <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
             </form>
           </div>
         </div>
