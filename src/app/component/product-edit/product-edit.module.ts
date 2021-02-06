@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/core/shared.module';
-import { LoginComponent } from './login.component';
+import { ProductEditComponent } from './product-edit.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [ProductEditComponent],
   imports: [
-    FormsModule,
     RouterModule.forChild([
       {
         path: '',
-        component: LoginComponent,
+        component: ProductEditComponent,
       },
     ]),
     SharedModule,
   ],
 })
-export class AuthModule {}
+export class ProductModule {}

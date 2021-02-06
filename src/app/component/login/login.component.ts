@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToasterService } from 'src/app/services/toaster.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,7 +11,11 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   isLoading = false;
   error = null;
-  constructor(private AuthService: AuthService, private router: Router) {}
+  constructor(
+    private AuthService: AuthService,
+    private router: Router,
+    private notifyService: ToasterService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -21,14 +26,19 @@ export class LoginComponent implements OnInit {
       loginForm.value.password
     ).subscribe(
       (resData) => {
+        this.notifyService.showSuccess(
+          'Login success !!',
+          'Welcome ' + loginForm.value.email
+        );
         this.error = null;
-        console.log(resData);
+        // console.log(resData);
         this.isLoading = false;
         this.router.navigate(['/product']);
       },
       (error) => {
+        this.notifyService.showError('Login Failed !!', error);
         this.error = error;
-        console.log(error);
+        // console.log(error);
         this.isLoading = false;
       }
     );
