@@ -6,6 +6,7 @@ import { ProductModel } from '../interfaces/product.model';
   providedIn: 'root',
 })
 export class ProductService {
+  ProductList: ProductModel[];
   constructor(private http: HttpClient) {}
 
   FetchProduct() {

@@ -6,10 +6,14 @@
       >
         <span class="font-weight-bold text-uppercase">Product List</span>
         <div>
-          <button class="btn btn-info">ADD PRODUCT</button>
+          <a [routerLink]="['/product/edit/new']">
+            <button class="btn btn-info">ADD PRODUCT</button></a
+          >
         </div>
       </div>
-      <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+      <div class="row justify-content-center align-items-center">
+        <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+      </div>
       <div class="row g-3">
         <div class="col-md-4" *ngFor="let product of Products; let i = index">
           <div class="card">
@@ -33,7 +37,11 @@
 
             <div class="card-body">
               <div class="text-right buttons">
-                <button class="btn btn-outline-dark" (click)="OnEdit()">
+                <button class="btn btn-outline-dark" (click)="OnAddtoCart(i)">
+                  Add to cart
+                </button>
+                |
+                <button class="btn btn-outline-dark" (click)="OnEdit(i)">
                   Edit
                 </button>
                 |

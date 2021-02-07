@@ -1,11 +1,12 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/core/shared.module';
-import { ProductEditComponent } from '../product-edit/product-edit.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
+
 import { ProductComponent } from './product.component';
 
 @NgModule({
-  declarations: [ProductComponent,ProductEditComponent],
+  declarations: [ProductComponent],
   imports: [
     RouterModule.forChild([
       {
@@ -13,9 +14,13 @@ import { ProductComponent } from './product.component';
         component: ProductComponent,
       },
       {
-        path: 'edit',
-        component: ProductEditComponent 
-      }
+        path: 'edit/:id',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('../product-edit/product-edit.module').then(
+            (m) => m.ProductEditModule
+          ),
+      },
     ]),
     SharedModule,
   ],

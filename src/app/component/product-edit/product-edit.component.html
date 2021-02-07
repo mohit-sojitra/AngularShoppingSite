@@ -1,1 +1,116 @@
-<p>product-edit works!</p>
+<div class="row">
+  <div class="col-md-4">
+    <div class="container">
+      <div class="row justify-content-center align-items-center">
+        <img
+          *ngIf="updatingProduct"
+          [src]="updatingProduct.image"
+          width="80%"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div id="login">
+      <div class="container">
+        <div id="login-row" class="row">
+          <div id="login-column" class="col-md-6">
+            <div id="login-box" class="col-md-12">
+              <br />
+              <form (ngSubmit)="onSubmit(editForm)" #editForm="ngForm">
+                <h3 class="text-center text-info">
+                  {{ isEditmode ? "Edit Product" : "Add Product" }}
+                </h3>
+                <br />
+                <div class="form-group">
+                  <label for="username" class="text-info">Product Title:</label
+                  ><br />
+                  <input
+                    required
+                    type="text"
+                    name="productTitle"
+                    id="productTitle"
+                    class="form-control"
+                    ngModel
+                    #productTitle="ngModel"
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="productTitle.invalid && productTitle.touched"
+                    >Invalid Product Title</small
+                  >
+                </div>
+                <div class="form-group">
+                  <label for="password" class="text-info">Category:</label
+                  ><br />
+                  <input
+                    type="text"
+                    name="productCategory"
+                    id="productCategory"
+                    class="form-control"
+                    ngModel
+                    #productCategory="ngModel"
+                    minlength="6"
+                    required
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="productCategory.invalid && productCategory.touched"
+                    >Invalide Product Category</small
+                  >
+                </div>
+                <div class="form-group">
+                  <label for="password" class="text-info">Price:</label><br />
+                  <input
+                    type="number"
+                    name="productPrice"
+                    id="productPrice"
+                    class="form-control"
+                    ngModel
+                    #productPrice="ngModel"
+                    minlength="6"
+                    required
+                  />
+                  <small
+                    class="text-danger"
+                    *ngIf="productPrice.invalid && productPrice.touched"
+                    >Invalid Product Price</small
+                  >
+                </div>
+                <div class="form-group">
+                  <label for="password" class="text-info">Description:</label
+                  ><br />
+                  <textarea
+                    name="Productdescription"
+                    class="form-control"
+                    style="width: 100%"
+                    rows="6"
+                    minlength="20"
+                    #description="ngModel"
+                    ngModel
+                    required
+                  ></textarea>
+                  <small
+                    class="text-danger"
+                    *ngIf="description.invalid && description.touched"
+                    >Invalid Input</small
+                  >
+                </div>
+                <div class="form-group" *ngIf="!isLoading">
+                  <input
+                    type="submit"
+                    name="submit"
+                    class="btn btn-info btn-md"
+                    value="SUBMIT"
+                    [disabled]="!editForm.valid"
+                  />
+                </div>
+                <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

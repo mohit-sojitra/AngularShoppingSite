@@ -19,16 +19,20 @@ export class ProductComponent implements OnInit {
       this.isLoading = false;
       // console.log(data);
       this.Products = data;
+      this.ProductService.ProductList = data;
     });
   }
 
-  OnEdit() {
-    this.router.navigate(['/product/edit']);
+  OnEdit(id: number) {
+    this.router.navigate(['/product/edit', id]);
   }
 
   OnDelete(i) {
     console.log(i);
-    this.Products.splice(i,1);
+    this.Products.splice(i, 1);
     console.log(this.Products);
+  }
+  OnAddtoCart(i){
+    console.log('haa bhai na khu 6u');
   }
 }
