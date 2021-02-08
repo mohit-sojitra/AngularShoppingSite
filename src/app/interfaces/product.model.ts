@@ -5,4 +5,5 @@ export interface ProductModel {
   category: string;
   image: string;
   description: string;
+  inCart: boolean;
 }

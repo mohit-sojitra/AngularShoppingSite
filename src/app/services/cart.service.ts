@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { cartModel } from '../interfaces/cart.model';
 import { ProductModel } from '../interfaces/product.model';
+import { ProductService } from './product.service';
+import { ToasterService } from './toaster.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,18 +10,27 @@ import { ProductModel } from '../interfaces/product.model';
 export class CartService {
   cartProducts: cartModel[] = [];
   totalPrice: number = 0;
-  constructor() {}
+  constructor(private ToasterService: ToasterService) {}
 
-  AddToCart(newProduct: ProductModel) {
+  AddToCart(newProduct: ProductModel, index: number) {
     const newCartProduct: cartModel = {
       product: newProduct,
       productQuantity: 1,
       totalPrice: newProduct.price * 1,
     };
     let element = this.cartProducts.findIndex((x) => x.product === newProduct);
-    if (element === -1) this.cartProducts.push(newCartProduct);
-    else console.log('already in cart');
-    console.log(this.cartProducts);
+    if (element === -1) {
+      this.ToasterService.showSuccess(
+        newCartProduct.product.title,
+        'Product is added in cart'
+      );
+      this.cartProducts.push(newCartProduct);
+    }
+    else
+      this.ToasterService.showInfo(
+        newCartProduct.product.title,
+        'Product is already in cart'
+      );
     this.totalPrice = 0;
     this.cartProducts.forEach((element) => {
       this.totalPrice = this.totalPrice + element.totalPrice;

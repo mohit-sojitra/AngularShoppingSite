@@ -43,7 +43,9 @@ export class ProductEditComponent implements OnInit {
       });
     });
   }
-  onSubmit(editForm) {}
+  onSubmit(editForm) {
+    this.router.navigate(['/product']);
+  }
 
   ngOnDestroy(): void {
     this.routeSub.unsubscribe();

@@ -37,7 +37,9 @@ export class ProductComponent implements OnInit {
     this.Products.splice(i, 1);
     console.log(this.Products);
   }
+
   OnAddtoCart(i) {
-    this.CartService.AddToCart(this.Products[i]);
+    console.log(this.Products[i].inCart);
+    this.CartService.AddToCart(this.Products[i],i);
   }
 }
