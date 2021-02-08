@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-info panel-shadow">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+          <div class="">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Description</th>
+                  <th>Qty</th>
+                  <th>Price</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of cartProducts; let i = index">
+                  <td>
+                    <img [src]="product.product.image" class="img-cart" />
+                  </td>
+                  <td>
+                    <strong>{{ product.product.title }}</strong>
+                    <p>{{ product.product.category }}</p>
+                  </td>
+                  <td>
+                    <form class="form-inline">
+                      <input
+                        class="form-control"
+                        type="number"
+                        name="productQuantity"
+                        minvalue="1"
+                        maxvalue="10"
+                        value="1"
+                        (change)="onChangeProductQuantity(i, productQuantity)"
+                        #productQuantity
+                      />
+                      <a class="btn btn-danger" (click)="onRemoveProduct(i)">
+                        Remove
+                      </a>
+                    </form>
+                  </td>
+                  <td>{{ product.product.price }}</td>
+                  <td>{{ product.totalPrice }}</td>
+                </tr>
+
+                <tr>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="text-right">Total Product</td>
+                  <td>{{totalPrice}}</td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="text-right">Total Shipping</td>
+                  <td>$2.00</td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="text-right">
+                    <strong>Total</strong>
+                  </td>
+                  <td>${{totalPrice+2}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <a [routerLink]="['/product']" class="btn btn-success"
+        ><span class="glyphicon glyphicon-arrow-left"></span>Continue
+        Shopping</a
+      >
+      <a href="#" class="btn btn-primary pull-right"
+        >Next<span class="glyphicon glyphicon-chevron-right"></span
+      ></a>
+    </div>
+  </div>
+</div>

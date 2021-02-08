@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductModel } from 'src/app/interfaces/product.model';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -11,7 +12,11 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductComponent implements OnInit {
   isLoading = false;
   Products: ProductModel[];
-  constructor(private ProductService: ProductService, private router: Router) {}
+  constructor(
+    private ProductService: ProductService,
+    private router: Router,
+    private CartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -32,7 +37,7 @@ export class ProductComponent implements OnInit {
     this.Products.splice(i, 1);
     console.log(this.Products);
   }
-  OnAddtoCart(i){
-    console.log('haa bhai na khu 6u');
+  OnAddtoCart(i) {
+    this.CartService.AddToCart(this.Products[i]);
   }
 }
