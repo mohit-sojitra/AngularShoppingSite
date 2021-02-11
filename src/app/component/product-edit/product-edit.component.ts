@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductModel } from 'src/app/interfaces/product.model';
 import { ProductService } from 'src/app/services/product.service';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -17,11 +18,12 @@ export class ProductEditComponent implements OnInit {
   updatingProductId: number = undefined;
   routeSub: Subscription;
   updatingProduct: ProductModel = null;
-
+  updatedProduct: ProductModel = null;
   constructor(
     private ProductService: ProductService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ToasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +46,45 @@ export class ProductEditComponent implements OnInit {
     });
   }
   onSubmit(editForm) {
-    this.router.navigate(['/product']);
+    this.isLoading = true;
+    this.updatedProduct = {
+      id: 1,
+      title: editForm.value.productTitle,
+      category: editForm.value.productCategory,
+      price: editForm.value.productPrice,
+      description: editForm.value.Productdescription,
+      image: 'null',
+    };
+    if (this.isEditmode) {
+      this.ProductService.UpdateProduct(
+        this.updatedProduct,
+        this.updatingProductId
+      ).subscribe(
+        (data) => {
+          this.router.navigate(['/product']);
+          this.ToasterService.showSuccess(
+            this.updatedProduct.title,
+            'Product Updated'
+          );
+        },
+        (error) => {
+          this.ToasterService.showError('Error', error);
+        }
+      );
+    } else {
+      this.ProductService.AddProduct(this.updatedProduct).subscribe(
+        (data) => {
+          this.router.navigate(['/product']);
+          this.ToasterService.showSuccess(
+            this.updatedProduct.title,
+            'New Product added'
+          );
+        },
+        (error) => {
+          this.ToasterService.showError('Error', error);
+        }
+      );
+    }
   }
 
   ngOnDestroy(): void {

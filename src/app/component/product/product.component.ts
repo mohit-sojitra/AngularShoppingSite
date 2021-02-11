@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ProductModel } from 'src/app/interfaces/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
+import { ToasterService } from 'src/app/services/toaster.service';
 
 @Component({
   selector: 'app-product',
@@ -12,10 +13,12 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductComponent implements OnInit {
   isLoading = false;
   Products: ProductModel[];
+  searchText:string;
   constructor(
     private ProductService: ProductService,
     private router: Router,
-    private CartService: CartService
+    private CartService: CartService,
+    private ToasterService: ToasterService
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +42,13 @@ export class ProductComponent implements OnInit {
   }
 
   OnAddtoCart(i) {
-    console.log(this.Products[i].inCart);
-    this.CartService.AddToCart(this.Products[i],i);
+    // console.log(this.Products[i].inCart);
+    this.CartService.AddToCart(this.Products[i], i).subscribe(data => {
+      this.ToasterService.showSuccess(this.Products[i].title,"Added to cart");
+    },error => {
+      this.ToasterService.showError('Error',error);
+    });
   }
+
+
 }

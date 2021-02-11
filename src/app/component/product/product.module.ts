@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { FilterPipe } from 'src/app/core/filter.pipe';
 import { SharedModule } from 'src/app/core/shared.module';
-
 import { ProductComponent } from './product.component';
 
 @NgModule({
-  declarations: [ProductComponent],
+  declarations: [ProductComponent,FilterPipe],
   imports: [
     RouterModule.forChild([
       {
@@ -21,6 +22,7 @@ import { ProductComponent } from './product.component';
       },
     ]),
     SharedModule,
+    FormsModule,
   ],
 })
 export class ProductModule {}
