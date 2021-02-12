@@ -13,7 +13,7 @@ import { ToasterService } from 'src/app/services/toaster.service';
 export class ProductComponent implements OnInit {
   isLoading = false;
   Products: ProductModel[];
-  searchText:string;
+  searchText: string;
   constructor(
     private ProductService: ProductService,
     private router: Router,
@@ -35,20 +35,33 @@ export class ProductComponent implements OnInit {
     this.router.navigate(['/product/edit', id]);
   }
 
-  OnDelete(i) {
-    console.log(i);
-    this.Products.splice(i, 1);
-    console.log(this.Products);
+  OnDelete(id) {
+    this.ProductService.DeleteProduct(id).subscribe(
+      (data) => {
+        this.ToasterService.showSuccess(
+          'Product Delete Successfully',
+          this.Products[id].title
+        );
+        this.Products.splice(id, 1);
+      },
+      (error) => {
+        this.ToasterService.showError('Error', error);
+      }
+    );
   }
 
   OnAddtoCart(i) {
     // console.log(this.Products[i].inCart);
-    this.CartService.AddToCart(this.Products[i], i).subscribe(data => {
-      this.ToasterService.showSuccess(this.Products[i].title,"Added to cart");
-    },error => {
-      this.ToasterService.showError('Error',error);
-    });
+    this.CartService.AddToCart(this.Products[i], i).subscribe(
+      (data) => {
+        this.ToasterService.showSuccess(
+          this.Products[i].title,
+          'Added to cart'
+        );
+      },
+      (error) => {
+        this.ToasterService.showError('Error', error);
+      }
+    );
   }
-
-
 }

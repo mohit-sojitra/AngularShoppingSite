@@ -6,7 +6,6 @@ import { ProductModel } from '../interfaces/product.model';
   providedIn: 'root',
 })
 export class ProductService {
-
   ProductList: ProductModel[];
   constructor(private http: HttpClient) {}
 
@@ -24,13 +23,17 @@ export class ProductService {
     });
   }
 
-  UpdateProduct(updatedProduct: ProductModel,id:number) {
-    return this.http.put('https://fakestoreapi.com/products/'+id, {
+  UpdateProduct(updatedProduct: ProductModel, id: number) {
+    return this.http.put('https://fakestoreapi.com/products/' + id, {
       title: updatedProduct.title,
       price: updatedProduct.price,
       description: updatedProduct.description,
       image: 'https://i.pravatar.cc',
       category: updatedProduct.category,
     });
+  }
+
+  DeleteProduct(id:number) {
+    return this.http.delete('https://fakestoreapi.com/products/'+id);
   }
 }

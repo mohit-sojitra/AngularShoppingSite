@@ -1,7 +1,11 @@
-import { ProductModel } from "./product.model";
-
 export interface cartModel {
-    product:ProductModel,
-    productQuantity:number,
-    totalPrice:number,
+  id: number;
+  userId: number;
+  date: Date;
+  products: CartProductModel[];
+}
+
+export interface CartProductModel {
+  productId: number;
+  quantity: number;
 }

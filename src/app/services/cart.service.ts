@@ -9,15 +9,18 @@ import { ToasterService } from './toaster.service';
   providedIn: 'root',
 })
 export class CartService {
-  cartProducts: cartModel[] = [];
+  cartProducts: cartModel;
   totalPrice: number = 0;
-  constructor(private ToasterService: ToasterService,private http: HttpClient) {}
+  constructor(
+    private ToasterService: ToasterService,
+    private http: HttpClient
+  ) {}
 
   AddToCart(newProduct: ProductModel, index: number) {
-    return this.http.put('https://fakestoreapi.com/carts/7',{
-      userid:3,
-      date:"2019-12-10",
-      product: [{productId:newProduct.id,quantity:3}]
+    return this.http.put('https://fakestoreapi.com/carts/7', {
+      userid: 3,
+      date: '2019-12-10',
+      product: [{ productId: newProduct.id, quantity: 3 }],
     });
 
     // const newCartProduct: cartModel = {
@@ -44,21 +47,17 @@ export class CartService {
     // });
   }
 
-  RemoveProduct(i: number) {
-    this.cartProducts.splice(i, 1);
-    this.totalPrice = 0;
-    this.cartProducts.forEach((element) => {
-      this.totalPrice = this.totalPrice + element.totalPrice;
-    });
+  FetchCartProduct() {
+    return this.http.get<cartModel>('https://fakestoreapi.com/carts/2');
   }
 
+  RemoveProduct(i: number) {}
+
   UpdateProductQuantity(index: any, productQuantity: number) {
-    this.cartProducts[index].productQuantity = productQuantity;
-    this.cartProducts[index].totalPrice =
-      this.cartProducts[index].product.price * productQuantity;
-    this.totalPrice = 0;
-    this.cartProducts.forEach((element) => {
-      this.totalPrice = this.totalPrice + element.totalPrice;
+    return this.http.put('https://fakestoreapi.com/carts/2', {
+      userId: 3,
+      date: '2019-12-10',
+      products: [{ productId: index, quantity: productQuantity }],
     });
   }
 }

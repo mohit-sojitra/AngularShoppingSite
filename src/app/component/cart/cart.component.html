@@ -3,7 +3,10 @@
     <div class="col-md-12">
       <div class="panel panel-info panel-shadow">
         <div class="panel-heading"></div>
-        <div class="panel-body">
+        <div class="row justify-content-center align-items-center">
+          <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+        </div>
+        <div class="panel-body" *ngIf="!isLoading">
           <div class="">
             <table class="table">
               <thead>
@@ -15,14 +18,15 @@
                   <th>Total</th>
                 </tr>
               </thead>
+              
               <tbody>
-                <tr *ngFor="let product of cartProducts; let i = index ;">
+                <tr *ngFor="let cart of cartProducts; let i = index">
                   <td>
-                    <img [src]="product.product.image" class="img-cart" />
+                    <img [src]="Product[cart.productId].image" class="img-cart" />
                   </td>
                   <td>
-                    <strong>{{ product.product.title }}</strong>
-                    <p>{{ product.product.category }}</p>
+                    <strong>{{ Product[cart.productId].title }}</strong>
+                    <p>{{ Product[cart.productId].category }}</p>
                   </td>
                   <td>
                     <form class="form-inline">
@@ -41,8 +45,8 @@
                       </a>
                     </form>
                   </td>
-                  <td>{{ product.product.price }}</td>
-                  <td>{{ product.totalPrice }}</td>
+                  <td>{{ Product[cart.productId].price }}</td>
+                  <td>{{ 0 }}</td>
                 </tr>
 
                 <tr>
@@ -50,7 +54,7 @@
                 </tr>
                 <tr>
                   <td colspan="4" class="text-right">Total Product</td>
-                  <td>{{totalPrice}}</td>
+                  <td>{{ totalPrice }}</td>
                 </tr>
                 <tr>
                   <td colspan="4" class="text-right">Total Shipping</td>
@@ -60,7 +64,7 @@
                   <td colspan="4" class="text-right">
                     <strong>Total</strong>
                   </td>
-                  <td>${{totalPrice+2}}</td>
+                  <td>${{ totalPrice + 2 }}</td>
                 </tr>
               </tbody>
             </table>
@@ -70,7 +74,8 @@
       <a [routerLink]="['/product']" class="btn btn-success"
         ><span class="glyphicon glyphicon-arrow-left"></span>Continue
         Shopping</a
-      > | 
+      >
+      |
       <a href="#" class="btn btn-primary pull-right"
         >Next<span class="glyphicon glyphicon-chevron-right"></span
       ></a>
