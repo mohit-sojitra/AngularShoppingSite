@@ -8,7 +8,6 @@ import { HeaderComponent } from './layouts/header/header.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthInterceptorService } from './services/auth-interceptor.service.';
 
 @NgModule({
@@ -19,7 +18,6 @@ import { AuthInterceptorService } from './services/auth-interceptor.service.';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    FontAwesomeModule,
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS ,

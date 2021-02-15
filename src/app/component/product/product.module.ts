@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FilterPipe } from 'src/app/core/filter.pipe';
-import { SharedModule } from 'src/app/core/shared.module';
+import { FilterPipe } from '../../core/filter.pipe';
+import { SharedModule } from '../../core/shared.module';
 import { ProductComponent } from './product.component';
 
 @NgModule({

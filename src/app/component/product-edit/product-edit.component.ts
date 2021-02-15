@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ProductModel } from 'src/app/interfaces/product.model';
-import { ProductService } from 'src/app/services/product.service';
-import { ToasterService } from 'src/app/services/toaster.service';
+import { ProductModel } from '../../interfaces/product.model';
+import { ProductService } from '../../services/product.service';
+import { ToasterService } from '../../services/toaster.service';
 
 @Component({
   selector: 'app-product-edit',
