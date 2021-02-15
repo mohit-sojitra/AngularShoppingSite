@@ -36,7 +36,7 @@
                         name="productQuantity"
                         minvalue="1"
                         maxvalue="10"
-                        value="1"
+                        [value]="cart.quantity"
                         (change)="onChangeProductQuantity(i, productQuantity)"
                         #productQuantity
                       />
