@@ -16,13 +16,17 @@ export class AuthInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    const userData: {
+      email: string;
+      token: string;
+    } = JSON.parse(localStorage.getItem('userData'));
     console.log('intercept');
-    const modifiedReq = req.clone({
-      params: new HttpParams().set(
-        'Token',
-        this.AuthService.user.getValue().token
-      ),
-    });
-    return next.handle(modifiedReq);
+    if (userData) {
+      const modifiedReq = req.clone({
+        params: new HttpParams().set('Token', userData.token),
+      });
+      return next.handle(modifiedReq);
+    }
+    return next.handle(req);
   }
 }
