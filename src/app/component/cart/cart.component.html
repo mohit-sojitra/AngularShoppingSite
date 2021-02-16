@@ -18,11 +18,14 @@
                   <th>Total</th>
                 </tr>
               </thead>
-              
+
               <tbody>
                 <tr *ngFor="let cart of cartProducts; let i = index">
                   <td>
-                    <img [src]="Product[cart.productId].image" class="img-cart" />
+                    <img
+                      [src]="Product[cart.productId].image"
+                      class="img-cart"
+                    />
                   </td>
                   <td>
                     <strong>{{ Product[cart.productId].title }}</strong>
@@ -46,25 +49,25 @@
                     </form>
                   </td>
                   <td>{{ Product[cart.productId].price }}</td>
-                  <td>{{ 0 }}</td>
+                  <td>{{ Product[cart.productId].price * productQuantity.value }}</td>
                 </tr>
 
                 <tr>
                   <td colspan="6"></td>
                 </tr>
-                <tr>
+                <tr hidden>
                   <td colspan="4" class="text-right">Total Product</td>
-                  <td>{{ totalPrice }}</td>
-                </tr>
-                <tr>
+                  <td>{{ fdfs }}</td>
+                </tr >
+                <tr hidden>
                   <td colspan="4" class="text-right">Total Shipping</td>
                   <td>$2.00</td>
                 </tr>
-                <tr>
+                <tr hidden>
                   <td colspan="4" class="text-right">
                     <strong>Total</strong>
                   </td>
-                  <td>${{ totalPrice + 2 }}</td>
+                  <td >${{ totalPrice + 2 }}</td>
                 </tr>
               </tbody>
             </table>

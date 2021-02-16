@@ -23,7 +23,6 @@ export class CartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.cartProducts = this.CartService.cartProducts;
     this.Product = this.ProductService.ProductList;
     this.totalPrice = this.CartService.totalPrice;
     this.isLoading = true;
@@ -40,11 +39,17 @@ export class CartComponent implements OnInit {
   }
 
   onChangeProductQuantity(index, productQuantity: HTMLInputElement) {
-    this.CartService.UpdateProductQuantity(index, +productQuantity.value).subscribe(data=>{
-      this.ToasterService.showInfo("Product updated",index);
-    },error=>{
-      this.ToasterService.showError('Error',error);
-    });
+    this.CartService.UpdateProductQuantity(
+      index,
+      +productQuantity.value
+    ).subscribe(
+      (data) => {
+        this.ToasterService.showInfo('Product updated', index);
+      },
+      (error) => {
+        this.ToasterService.showError('Error', error);
+      }
+    );
     // this.totalPrice = this.CartService.totalPrice;
   }
 }
