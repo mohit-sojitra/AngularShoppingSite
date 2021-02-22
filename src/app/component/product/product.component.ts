@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductModel } from '../../interfaces/product.model';
 import { CartService } from '../../services/cart.service';
 import { ProductService } from '../../services/product.service';
@@ -11,9 +11,11 @@ import { ToasterService } from '../../services/toaster.service';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-  isLoading = false;
-  Products: ProductModel[];
-  searchText: string;
+  public isLoading = false;
+  public Products: ProductModel[];
+  public numberofpages: number[];
+  public searchText: string;
+  public page:number = 1;
   constructor(
     private ProductService: ProductService,
     private router: Router,
@@ -22,6 +24,7 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.numberofpages = Array(4).fill(0).map((x, i) => i + 1);
     this.isLoading = true;
     this.ProductService.FetchProduct().subscribe((data: ProductModel[]) => {
       this.isLoading = false;
@@ -36,18 +39,24 @@ export class ProductComponent implements OnInit {
   }
 
   OnDelete(id) {
-    this.ProductService.DeleteProduct(id).subscribe(
-      (data) => {
-        this.ToasterService.showSuccess(
-          'Product Delete Successfully',
-          this.Products[id].title
-        );
-        this.Products.splice(id, 1);
-      },
-      (error) => {
-        this.ToasterService.showError('Error', error);
-      }
-    );
+    if (confirm('Are you sure to delete?')) {
+      this.ProductService.DeleteProduct(id).subscribe(
+        (data) => {
+          this.ToasterService.showSuccess(
+            'Product Delete Successfully',
+            this.Products[id].title
+          );
+          this.Products.splice(id, 1);
+        },
+        (error) => {
+          this.ToasterService.showError('Error', error);
+        }
+      );
+    }
+  }
+
+  resetPage(){
+    this.page = 1;
   }
 
   OnAddtoCart(i) {

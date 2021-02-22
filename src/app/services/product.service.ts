@@ -6,14 +6,14 @@ import { ProductModel } from '../interfaces/product.model';
   providedIn: 'root',
 })
 export class ProductService {
-  ProductList: ProductModel[];
+  public ProductList: ProductModel[];
   constructor(private http: HttpClient) {}
 
-  FetchProduct() {
+  public FetchProduct() {
     return this.http.get<ProductModel[]>('https://fakestoreapi.com/products');
   }
 
-  AddProduct(newProduct: ProductModel) {
+  public AddProduct(newProduct: ProductModel) {
     return this.http.post('https://fakestoreapi.com/products', {
       title: newProduct.title,
       price: newProduct.price,
@@ -23,7 +23,7 @@ export class ProductService {
     });
   }
 
-  UpdateProduct(updatedProduct: ProductModel, id: number) {
+  public UpdateProduct(updatedProduct: ProductModel, id: number) {
     return this.http.put('https://fakestoreapi.com/products/' + id, {
       title: updatedProduct.title,
       price: updatedProduct.price,
@@ -33,7 +33,7 @@ export class ProductService {
     });
   }
 
-  DeleteProduct(id:number) {
+  public DeleteProduct(id:number) {
     return this.http.delete('https://fakestoreapi.com/products/'+id);
   }
 }

@@ -9,17 +9,17 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  isLoading = false;
-  error = null;
+  public isLoading = false;
+  public error = null;
   constructor(
     private AuthService: AuthService,
     private router: Router,
     private notifyService: ToasterService
   ) {}
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 
-  onSubmit(loginForm) {
+  public onSubmit(loginForm) {
     this.isLoading = true;
     this.AuthService.Login(
       loginForm.value.email,

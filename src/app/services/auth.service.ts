@@ -18,11 +18,11 @@ export class AuthService {
     email: null,
     token: null,
   };
-  user = new BehaviorSubject<UserModel>(null);
+  public user = new BehaviorSubject<UserModel>(null);
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  Login(email: string, password: string) {
+  public Login(email: string, password: string) {
     return this.http
       .post<UserModel>('https://reqres.in/api/login', {
         email: email,
@@ -40,7 +40,7 @@ export class AuthService {
       );
   }
 
-  Logout() {
+  public Logout() {
     this.user.next(null);
     localStorage.removeItem('userData');
   }
@@ -50,7 +50,7 @@ export class AuthService {
     return throwError(errorMessage);
   }
 
-  autoLogin() {
+  public autoLogin() {
     const userData: {
       email: string;
       token: string;

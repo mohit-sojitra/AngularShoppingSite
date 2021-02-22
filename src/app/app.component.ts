@@ -8,7 +8,7 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   constructor(private authService: AuthService) {}
-  title = 'AngularTask3';
+  public title = 'AngularTask3';
   ngOnInit(): void {
     this.authService.autoLogin();
   }

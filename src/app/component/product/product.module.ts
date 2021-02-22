@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipe } from '../../core/filter.pipe';
 import { SharedModule } from '../../core/shared.module';
 import { ProductComponent } from './product.component';
@@ -23,6 +24,7 @@ import { ProductComponent } from './product.component';
     ]),
     SharedModule,
     FormsModule,
+    NgxPaginationModule
   ],
 })
 export class ProductModule {}

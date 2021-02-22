@@ -12,33 +12,42 @@ import { ToasterService } from '../../services/toaster.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  isLoading = false;
-  totalPrice: number = 0;
-  cartProducts: CartProductModel[];
-  Product: ProductModel[];
+  public isLoading = false;
+  public totalPrice: number = 0;
+  public cartProducts: CartProductModel[];
+  public Product: ProductModel[];
   constructor(
     private CartService: CartService,
     private ProductService: ProductService,
     private ToasterService: ToasterService
   ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.Product = this.ProductService.ProductList;
     this.totalPrice = this.CartService.totalPrice;
     this.isLoading = true;
     this.CartService.FetchCartProduct().subscribe((data) => {
       this.isLoading = false;
-      this.CartService.cartProducts = data;
-      this.cartProducts = data.products;
+      this.CartService.cartProducts = data[0];
+      this.cartProducts = data[0].products;
     });
   }
 
-  onRemoveProduct(i) {
-    this.CartService.RemoveProduct(i);
+  public onRemoveProduct(i) {
+    if(confirm("Are you sure to delete?"))
+    this.CartService.RemoveProduct(i).subscribe(
+      (data) => {
+        this.ToasterService.showInfo('Product removed',i);
+        this.cartProducts.splice(i, 1);
+      },
+      (error) => {
+        this.ToasterService.showError('Error', error);
+      }
+    );
     this.totalPrice = this.CartService.totalPrice;
   }
 
-  onChangeProductQuantity(index, productQuantity: HTMLInputElement) {
+  public onChangeProductQuantity(index, productQuantity: HTMLInputElement) {
     this.CartService.UpdateProductQuantity(
       index,
       +productQuantity.value

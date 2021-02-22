@@ -13,12 +13,12 @@ import { ToasterService } from '../../services/toaster.service';
 })
 export class ProductEditComponent implements OnInit {
   @ViewChild('editForm', { static: false }) editForm: NgForm;
-  isLoading: boolean = false;
-  isEditmode: boolean = false;
-  updatingProductId: number = undefined;
-  routeSub: Subscription;
-  updatingProduct: ProductModel = null;
-  updatedProduct: ProductModel = null;
+  public isLoading: boolean = false;
+  public isEditmode: boolean = false;
+  public updatingProductId: number = undefined;
+  private routeSub: Subscription;
+  public updatingProduct: ProductModel = null;
+  public updatedProduct: ProductModel = null;
   constructor(
     private ProductService: ProductService,
     private router: Router,
@@ -32,7 +32,7 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
-  loadUserDetail(id: number) {
+  private loadUserDetail(id: number) {
     this.updatingProductId = id;
     this.isEditmode = true;
     this.updatingProduct = this.ProductService.ProductList[id];
@@ -45,7 +45,7 @@ export class ProductEditComponent implements OnInit {
       });
     });
   }
-  onSubmit(editForm) {
+  public onSubmit(editForm) {
     this.isLoading = true;
     this.updatedProduct = {
       id: 1,
@@ -87,7 +87,7 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
-  ngOnDestroy(): void {
+  private ngOnDestroy(): void {
     this.routeSub.unsubscribe();
   }
 }

@@ -10,21 +10,21 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   private userSub: Subscription;
-  isAuthenticated = false;
+  public isAuthenticated = false;
   constructor(private AuthService: AuthService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.userSub = this.AuthService.user.subscribe((user) => {
       // console.log(user);
       this.isAuthenticated = !!user;
     });
   }
 
-  authButton() {
+  public authButton() {
     this.AuthService.Logout();
   }
 
-  ngOnDestroy(): void {
+  private ngOnDestroy(): void {
     this.userSub.unsubscribe();
   }
 }
