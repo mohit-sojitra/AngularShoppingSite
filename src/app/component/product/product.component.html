@@ -27,7 +27,7 @@
         <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
       </div>
       <div class="row g-3">
-        <div class="col-md-4" *ngFor="let product of Products | FilterPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }; let i = index ;">
+        <div class="col-md-4" *ngFor="let product of Products | FilterPipe : searchText | paginate: { itemsPerPage: 5, currentPage: page }; let i = index ;">
           <div class="card">  
             <img [src]="product.image" class="card-img-top" height="500px" />
             <div class="card-body">
